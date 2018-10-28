@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>C9B82436-4CC6-44EB-8C34-6C6907748236</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sign_up_1" transform="translate(-815.000000, -768.000000)">
+            <g id="Group-10" transform="translate(160.000000, 140.000000)">
+                <g id="popup" transform="translate(590.000000, 0.000000)">
+                    <g id="Group-6">
+                        <g id="Group-9" transform="translate(65.000000, 628.000000)">
+                            <g id="fb">
+                                <circle id="Oval-4-Copy-5" fill="#3A5997" cx="25" cy="25" r="25"></circle>
+                                <g id="facebook-2" transform="translate(19.000000, 14.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M7.78895884,21.9998938 L7.78895884,11.9646327 L11.3269297,11.9646327 L11.8566155,8.05372699 L7.78895884,8.05372699 L7.78895884,5.5567306 C7.78895884,4.42445578 8.11924533,3.65274961 9.82479566,3.65274961 L12,3.65179348 L12,0.153937533 C11.6236296,0.106449557 10.3324996,0 8.83036553,0 C5.69420604,0 3.54712069,1.82249715 3.54712069,5.16960267 L3.54712069,8.05383323 L0,8.05383323 L0,11.9647389 L3.5470091,11.9647389 L3.5470091,22 L7.78895884,21.9998938 Z" id="Shape"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

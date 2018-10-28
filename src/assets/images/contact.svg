@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="102px" height="102px" viewBox="0 0 102 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_bitcoin</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="51" cy="51" r="50"></circle>
+        <filter x="-27.0%" y="-15.0%" width="154.0%" height="154.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="12" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="settings_address_book-copy-3" transform="translate(-669.000000, -186.000000)">
+            <g id="Group-13" transform="translate(475.000000, 186.000000)">
+                <g id="popup-copy-2">
+                    <g id="ic_bitcoin" transform="translate(194.000000, 0.000000)">
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#F0830E" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <path d="M51,0 C22.8334778,-1.72470207e-15 3.44940413e-15,22.8334778 0,51 C-3.44940413e-15,79.1665222 22.8334778,102 51,102 C79.1665222,102 102,79.1665222 102,51 C102,37.473959 96.6268011,24.5019095 87.0624458,14.9375542 C77.4980905,5.37319886 64.526041,8.2823114e-16 51,0 Z M77.934375,86.540625 L74.26875,85.425 C61.359375,83.034375 61.359375,78.890625 61.359375,76.340625 L61.359375,74.746875 C64.6179622,71.6856247 66.9393988,67.7612914 68.053125,63.43125 C72.0375,63.43125 72.834375,55.303125 72.834375,54.028125 C72.834375,52.753125 72.99375,47.971875 69.009375,47.971875 C77.615625,24.703125 54.825,15.3 37.771875,27.253125 C30.759375,27.253125 30.121875,37.6125 32.83125,47.971875 C28.846875,47.971875 29.00625,52.9125 29.00625,54.028125 C29.00625,55.14375 29.9625,63.43125 33.7875,63.43125 C34.9177261,67.8369948 37.2976608,71.8220016 40.640625,74.90625 L40.640625,76.5 C40.640625,79.05 40.640625,83.19375 27.73125,85.584375 L24.065625,86.540625 C8.739696,74.9925909 2.5124904,54.9396603 8.60110958,36.741586 C14.6897288,18.5435118 31.730701,6.27552982 50.9203125,6.27552982 C70.109924,6.27552982 87.1508962,18.5435118 93.2395154,36.741586 C99.3281346,54.9396603 93.100929,74.9925909 77.775,86.540625 L77.934375,86.540625 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

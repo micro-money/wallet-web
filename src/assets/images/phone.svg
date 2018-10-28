@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>phone</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-521.000000, -53.000000)">
+            <g id="phone" transform="translate(519.000000, 50.000000)">
+                <polygon id="Shape" points="0 0 20 0 20 20 0 20"></polygon>
+                <path d="M5.01666667,9.49166667 C6.21666667,11.85 8.15,13.775 10.5083333,14.9833333 L12.3416667,13.15 C12.5666667,12.925 12.9,12.85 13.1916667,12.95 C14.125,13.2583333 15.1333333,13.425 16.1666667,13.425 C16.625,13.425 17,13.8 17,14.2583333 L17,17.1666667 C17,17.625 16.625,18 16.1666667,18 C8.34166667,18 2,11.6583333 2,3.83333333 C2,3.375 2.375,3 2.83333333,3 L5.75,3 C6.20833333,3 6.58333333,3.375 6.58333333,3.83333333 C6.58333333,4.875 6.75,5.875 7.05833333,6.80833333 C7.15,7.1 7.08333333,7.425 6.85,7.65833333 L5.01666667,9.49166667 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

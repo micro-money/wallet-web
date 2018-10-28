@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="15px" viewBox="0 0 8 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>eth</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-26.000000, -3.000000)">
+            <g id="eth" transform="translate(20.000000, 0.000000)">
+                <polygon id="Shape" points="0 0 20 0 20 20 0 20"></polygon>
+                <g id="Ethereum_logo_2014" transform="translate(6.000000, 3.000000)" fill="#9E9E9E" fill-rule="nonzero">
+                    <polygon id="Shape" points="3.98648042 0 3.89940542 0.320925868 3.89940542 9.63345136 3.98648042 9.72770222 7.97298888 7.17252424"></polygon>
+                    <polygon id="Shape" points="3.98650846 0 0 7.17252424 3.98650846 9.727736 3.98650846 5.20771473"></polygon>
+                    <polygon id="Shape" points="3.98648042 11.01575 3.93741312 11.0806108 3.93741312 14.3979371 3.98648042 14.5533665 7.97535658 8.46185574"></polygon>
+                    <polygon id="Shape" points="3.98650846 14.5533192 3.98650846 11.0157027 0 8.46180845"></polygon>
+                    <polygon id="Shape" points="3.98648042 9.72769209 7.97292658 7.17254789 3.98648042 5.20773838"></polygon>
+                    <polygon id="Shape" points="2.80384615e-05 7.17255127 3.98647419 9.72769546 3.98647419 5.20774176"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

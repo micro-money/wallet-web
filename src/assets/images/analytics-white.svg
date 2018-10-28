@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_analytics</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="presentation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-39.000000, -20.000000)">
+            <g id="ic_analytics" transform="translate(36.000000, 18.000000)">
+                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                <path d="M8,22 L10.5,22 L10.5,14 L8,14 L8,22 Z M13,22 L15.5,22 L15.5,6 L13,6 L13,22 Z M18,22 L20.5,22 L20.5,2 L18,2 L18,22 Z M3,22 L5.5,22 L5.5,10 L3,10 L3,22 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

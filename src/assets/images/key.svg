@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="21px" viewBox="0 0 22 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>key</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-268.000000, -49.000000)">
+            <g id="key" transform="translate(267.000000, 48.000000)">
+                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                <g id="Group" transform="translate(1.000000, 1.000000)" fill="#000000" fill-rule="nonzero">
+                    <path d="M8.9969,9.57 C6.6935,8.2841 3.7301,8.6152 1.7732,10.5721 C-0.5896,12.9349 -0.5885,16.7662 1.7732,19.1268 C4.1349,21.4896 7.9662,21.4896 10.329,19.1268 C12.2859,17.1699 12.6159,14.2065 11.33,11.9042 L16.1634,7.0708 L18.4965,9.405 L21.6073,6.2931 L19.2742,3.96 L20.0519,3.1812 L17.7188,0.8492 L8.9969,9.57 Z M8.7736,17.5725 C7.2732,19.074 4.8301,19.074 3.3286,17.5725 C1.8282,16.071 1.8282,13.629 3.3286,12.1286 C4.8301,10.6271 7.2721,10.6271 8.7736,12.1286 C10.274,13.6301 10.274,16.071 8.7736,17.5725 Z" id="Shape" transform="translate(10.804406, 10.874050) rotate(-180.000000) translate(-10.804406, -10.874050) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
