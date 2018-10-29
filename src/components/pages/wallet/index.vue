@@ -181,7 +181,6 @@
             @click="createAsset('newToken')">
             ADD NEW TOKEN
           </el-button>
-
         </el-container>
 
         <template v-if="invoices[0]">
@@ -264,6 +263,12 @@
                 </el-col>
               </el-menu-item>
             </el-menu>
+
+            <el-button
+              class="add-asset-button"
+              @click="$router.push({ path: '/account/wallet/invoices' })">
+              ALL INVOICES
+            </el-button>
           </el-container>
         </template>
       </el-aside>
@@ -409,6 +414,7 @@ export default {
       if (!clickMore && asset) {
         this.debounceChangeAssets(`/account/wallet/asset/${asset.id}`)
         this.$refs['menu-invoices'].activeIndex = null
+        this.scrollToTop()
       }
     },
     handleClickInvoice (event, invoice) {
@@ -418,10 +424,16 @@ export default {
       if (!clickMore && invoice) {
         this.debounceChangeAssets(`/account/wallet/invoice/${invoice.id}`)
         this.$refs.menu.activeIndex = null
+        this.scrollToTop()
       }
     },
     invoiceIcon (invoice) {
       return `/img/invoice-services/${invoice.service.id}.svg`
+    },
+    scrollToTop () {
+      const top = document.getElementById('main-view')
+
+      top && top.scrollTo(0, 0)
     }
   }
 }

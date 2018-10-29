@@ -319,9 +319,10 @@ export default {
       window.removeEventListener('storage', this.checkToken)
     },
     checkRoute () {
+      // todo: need refactoring
       if (!VueAuth.isAuthenticated() && this.$route.path !== '/') this.$router.push({ path: '/' })
       else if (VueAuth.isAuthenticated() && this.$route.fullPath === this.path && this.assets && this.assets[0]) this.$router.push(`${this.path}/asset/${this.assets[0].id}`)
-      else if (VueAuth.isAuthenticated() && !this.$route.path.includes('/settings') && this.$route.path !== '/account/wallet' && this.$route.path !== '/account/wallet/transactions' && !this.$route.params.id) this.$router.push({ path: '/account/wallet' })
+      else if (VueAuth.isAuthenticated() && !this.$route.path.includes('/settings') && this.$route.path !== '/account/wallet' && this.$route.path !== '/account/wallet/transactions' && this.$route.path !== '/account/wallet/invoices' && !this.$route.params.id) this.$router.push({ path: '/account/wallet' })
     },
     async getWalletAndCheck () {
       let assetList
