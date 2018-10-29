@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import landing from '@/components/pages/landing'
 import wallet from '@/components/pages/wallet'
 import asset from '@/components/pages/wallet/asset'
+import invoice from '@/components/pages/wallet/invoice'
 import transaction from '@/components/pages/wallet/transaction'
 
 Vue.use(Router)
@@ -17,7 +18,8 @@ export default new Router({
       path: '/account/:page',
       component: wallet,
       children: [
-        { path: ':id', component: asset }
+        { path: 'asset/:id', component: asset },
+        { path: 'invoice/:id', component: invoice }
       ]
     },
     {

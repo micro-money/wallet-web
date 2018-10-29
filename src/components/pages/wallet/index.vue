@@ -50,14 +50,14 @@
           <el-menu
             v-if="assets[0]"
             ref="menu"
-            :default-active="$route.path !== '/account/wallet/transactions' ? `${path}/${assets[0].id}` : null"
+            :default-active="$route.path !== '/account/wallet/transactions' ? `${path}/asset/${assets[0].id}` : null"
             class="assets-menu">
             <el-menu-item-group class="clearfix">
               <el-menu-item
                 v-for="(asset, index) in assets"
                 v-if="asset.type === 'cryptocurrency'"
                 :key="index"
-                :index="`${path}/${asset.id}`"
+                :index="`${path}/asset/${asset.id}`"
                 class="asset-amount clearfix"
                 @click.native="handleClickMenu($event, asset)">
                 <el-col
@@ -110,71 +110,70 @@
                   add_circle_outline
                 </i>
               </template>
+              <el-menu-item
+                v-for="(asset, index) in assets"
+                v-if="asset.type === 'token'"
+                :key="index"
+                :index="`${path}/asset/${asset.id}`"
+                class="asset-amount clearfix"
+                @click.native="handleClickMenu($event, asset)">
+                <el-col
+                  :span="serviceUnavailable(asset) ? 22 : 13"
+                  class="asset-name">
+                  <div class="asset-name-container">
+                    <div class="child">
+                      <div class="image">
+                        <img
+                          :src="getSrcToken(asset)"
+                          class="currency-icon"
+                          @error="(e) => { e.target.src = getRandomSrcToken(asset) }">
+                      </div>
+                      <div class="text">{{ asset.name }}
+                        <span
+                          v-if="serviceUnavailable(asset)"
+                          class="unavailable">
+                          <i class="material-icons md-dark md-12">
+                            watch_later
+                          </i>
+                          Service temporary unavailable</span>
+                      </div>
+                    </div>
+                  </div>
+                </el-col>
+
+                <el-col :span="serviceUnavailable(asset) ? 0 : 9">
+                  <template v-if="!serviceUnavailable(asset)">
+                    <div class="main-balance alone">
+                      {{ getBalance(asset) }}&nbsp;{{ asset.symbol }}
+                    </div>
+                  </template>
+
+                  <template v-else>
+                    &nbsp;
+                  </template>
+                </el-col>
+
+                <el-col
+                  :span="2"
+                  class="asset-actions">
+                  <el-dropdown
+                    trigger="click"
+                    @command="handleAssetAction">
+                    <span class="el-dropdown-link">
+                      <i
+                        class="material-icons md-dark md-24 more">
+                        more_vert
+                      </i>
+                    </span>
+                    <el-dropdown-menu
+                      slot="dropdown"
+                      :class="{ 'closer-dropdown': true, 'asset-dropdown': true, dark: isDark }">
+                      <el-dropdown-item :command="{ action: 'remove', asset }">Remove</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </el-col>
+              </el-menu-item>
             </el-menu-item-group>
-
-            <el-menu-item
-              v-for="(asset, index) in assets"
-              v-if="asset.type === 'token'"
-              :key="index"
-              :index="`${path}/${asset.id}`"
-              class="asset-amount clearfix"
-              @click.native="handleClickMenu($event, asset)">
-              <el-col
-                :span="serviceUnavailable(asset) ? 22 : 13"
-                class="asset-name">
-                <div class="asset-name-container">
-                  <div class="child">
-                    <div class="image">
-                      <img
-                        :src="getSrcToken(asset)"
-                        class="currency-icon"
-                        @error="(e) => { e.target.src = getRandomSrcToken(asset) }">
-                    </div>
-                    <div class="text">{{ asset.name }}
-                      <span
-                        v-if="serviceUnavailable(asset)"
-                        class="unavailable">
-                        <i class="material-icons md-dark md-12">
-                          watch_later
-                        </i>
-                        Service temporary unavailable</span>
-                    </div>
-                  </div>
-                </div>
-              </el-col>
-
-              <el-col :span="serviceUnavailable(asset) ? 0 : 9">
-                <template v-if="!serviceUnavailable(asset)">
-                  <div class="main-balance alone">
-                    {{ getBalance(asset) }}&nbsp;{{ asset.symbol }}
-                  </div>
-                </template>
-
-                <template v-else>
-                  &nbsp;
-                </template>
-              </el-col>
-
-              <el-col
-                :span="2"
-                class="asset-actions">
-                <el-dropdown
-                  trigger="click"
-                  @command="handleAssetAction">
-                  <span class="el-dropdown-link">
-                    <i
-                      class="material-icons md-dark md-24 more">
-                      more_vert
-                    </i>
-                  </span>
-                  <el-dropdown-menu
-                    slot="dropdown"
-                    :class="{ 'closer-dropdown': true, 'asset-dropdown': true, dark: isDark }">
-                    <el-dropdown-item :command="{ action: 'remove', asset }">Remove</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
-              </el-col>
-            </el-menu-item>
           </el-menu>
 
           <el-button
@@ -184,6 +183,89 @@
           </el-button>
 
         </el-container>
+
+        <template v-if="invoices[0]">
+          <el-container
+            direction="horizontal"
+            class="invoices assets-header hidden-sm-and-down">
+            <el-col :span="24">
+              <h2>Invoices</h2>
+            </el-col>
+          </el-container>
+
+          <el-container
+            :class="{ 'hidden-sm-and-down': !showMobileMenu }"
+            direction="vertical">
+
+            <el-menu
+              ref="menu-invoices"
+              :default-active="null"
+              class="assets-menu invoices-menu">
+              <el-menu-item
+                v-for="(invoice, index) in invoices"
+                :key="index"
+                :index="`${path}/invoice/${invoice.id}`"
+                class="asset-amount clearfix"
+                @click.native="handleClickInvoice($event, invoice)">
+                <el-col
+                  :span="13"
+                  class="asset-name">
+                  <div class="asset-name-container">
+                    <div class="child">
+                      <div class="image">
+                        <img
+                          :src="invoiceIcon(invoice)"
+                          class="currency-icon">
+                      </div>
+                      <div class="text">{{ invoice.service.title }}
+                        <span class="descr">
+                          {{ invoice.description }}
+                        </span>
+                      </div>
+                    </div>
+                </div></el-col>
+
+                <el-col :span="9">
+                  <div
+                    :class="['main-balance', {
+                      green: invoice.status === 'paid',
+                      gray: invoice.status === 'pending',
+                      orange: invoice.status === 'new' }]">
+                    <i
+                      :class="['material-icons', 'md-10']">
+                      brightness_1
+                    </i> {{ fixCrypto(invoice.amount) }} &nbsp;{{ invoice.currency }}
+                  </div>
+
+                  <div class="secondary-balance">
+                    {{ fixFiat(invoice.amountUsd) }} &nbsp;USD
+                  </div>
+                </el-col>
+
+                <el-col
+                  :span="2"
+                  class="asset-actions">
+                  <el-dropdown
+                    v-if="invoice.status === 'new'"
+                    trigger="click"
+                    @command="handleAssetAction">
+                    <span class="el-dropdown-link">
+                      <i
+                        class="material-icons md-dark md-24 more">
+                        more_vert
+                      </i>
+                    </span>
+                    <el-dropdown-menu
+                      slot="dropdown"
+                      :class="{ 'closer-dropdown': true, 'asset-dropdown': true, dark: isDark }">
+                      <el-dropdown-item :command="{ action: 'pay', invoice }">Pay</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </el-col>
+              </el-menu-item>
+            </el-menu>
+          </el-container>
+        </template>
       </el-aside>
     </el-col>
 
@@ -218,6 +300,7 @@ export default {
       wallet: 'wallet/current',
       password: 'wallet/password',
       allAssets: 'wallet/assets',
+      invoices: 'wallet/invoices',
       loading: 'status/loadingAssets',
       isDark: 'auth/isDark'
     }),
@@ -320,8 +403,22 @@ export default {
       const clickMore = [...classes].includes('more')
 
       if (!clickMore && asset) {
-        this.debounceChangeAssets(`/account/wallet/${asset.id}`)
+        this.debounceChangeAssets(`/account/wallet/asset/${asset.id}`)
+        this.$refs['menu-invoices'].activeIndex = null
       }
+    },
+    handleClickInvoice (event, invoice) {
+      const classes = _get(event, 'srcElement.classList', null)
+      const clickMore = [...classes].includes('more')
+
+      if (!clickMore && invoice) {
+        this.debounceChangeAssets(`/account/wallet/invoice/${invoice.id}`)
+        console.log(this.$refs.menu)
+        this.$refs.menu.activeIndex = null
+      }
+    },
+    invoiceIcon (invoice) {
+      return `/img/invoice-services/${invoice.service.id}.svg`
     }
   }
 }
@@ -450,6 +547,10 @@ export default {
                         margin-left: 0;
                       }
                     }
+
+                    .text .descr {
+                      font-size: $--font-size-small;
+                    }
                   }
                 }
               }
@@ -506,6 +607,18 @@ export default {
                   margin-top: 0;
                 }
 
+                &.green {
+                  color: $--color-green;
+                }
+
+                &.gray {
+                  color: $--color-gray-light;
+                }
+
+                &.orange {
+                  color: $--color-orange;
+                }
+
                 @media (min-width: 991px) and (max-width: 1366px) {
                   font-size: 15px;
                 }
@@ -538,12 +651,26 @@ export default {
                 }
               }
             }
+
+            &.invoices-menu {
+              .main-balance {
+                font-size: $--font-size-small;
+              }
+
+              .secondary-balance {
+                font-size: $--font-size-small;
+              }
+            }
           }
 
           .add-asset-button {
             margin: 30px 20px 0 20px;
             font-size: 15px;
             padding: 14px 0;
+          }
+
+          .invoices {
+            margin-top: 20px;
           }
 
           @media (min-width: 990px) and (max-width: 1381px) {

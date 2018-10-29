@@ -1,5 +1,5 @@
 import * as Mutate from '@/store/mutations'
-import { Wallet, Asset } from '@/api/rest'
+import { Wallet, Asset, Invoice } from '@/api/rest'
 import { _get, _find, _findIndex, _isNumber } from '@/utils/lodash'
 import Vue from 'vue'
 
@@ -7,6 +7,7 @@ const state = {
   password: null,
   current: {},
   assets: [],
+  invoices: [],
   transactionList: [],
   currentRate: null,
   privateKey: [],
@@ -18,6 +19,7 @@ const state = {
 const getters = {
   password: state => state.password,
   assets: state => state.assets,
+  invoices: state => state.invoices,
   current: state => state.current, // ({ ...state.current, ...({password: state.current.mnemonic}) }), // todo: remove mnemonic
   transactionList: state => {
     return state.transactionList.filter(transaction => { return _get(transaction, 'to.hash') })
@@ -48,8 +50,12 @@ const actions = {
 
       response = await Wallet.get()
 
+      // todo: remove when api ready
+      response.data.wallet.invoicesList = Wallet.invoicesFixture.invoicesList
+
       commit(Mutate.wallet.current, response)
       commit(Mutate.wallet.assets, { response, wallet: true })
+      commit(Mutate.wallet.invoices, { response, wallet: true })
       dispatch('status/changeMessage', { response, type: 'success' }, { root: true })
     } catch (e) {
       dispatch('status/changeMessage', { response: e, type: 'error' }, { root: true })
@@ -158,6 +164,30 @@ const actions = {
         })
       }
     } catch (e) { dispatch('status/changeMessage', { response: e, type: 'error' }, { root: true }) }
+  },
+  async getAllInvoices ({ dispatch, commit }) {
+    let response
+
+    try {
+      response = await Invoice.getAll()
+
+      commit(Mutate.wallet.invoices, { response })
+      dispatch('status/changeMessage', { response, type: 'success' }, { root: true })
+    } catch (e) { dispatch('status/changeMessage', { response: e, type: 'error' }, { root: true }) }
+  },
+  async getInvoice ({ dispatch, commit }, id) {
+    let response
+
+    try {
+      dispatch('status/setLoadingInstance', { instance: 'invoice', status: true }, { root: true })
+
+      response = await Invoice.get(id)
+
+      commit(Mutate.wallet.invoices, { response })
+      dispatch('status/changeMessage', { response, type: 'success' }, { root: true })
+    } catch (e) {
+      dispatch('status/changeMessage', { response: e, type: 'error' }, { root: true })
+    } finally { dispatch('status/setLoadingInstance', { instance: 'invoice', status: false }, { root: true }) }
   },
   async convertRate ({ dispatch, commit }, { from, to, amount }) {
     let response
@@ -288,6 +318,19 @@ const mutations = {
 
       Vue.set(state.assets, index, asset)
     }
+  },
+  [Mutate.wallet.invoices] (state, { response, wallet, remove }) {
+    const path = wallet ? 'data.wallet.invoicesList' : 'data.invoicesList'
+    const invoice = _get(response, 'data.invoice', null)
+    const index = invoice ? _findIndex(state.invoices, ['id', invoice.id]) : null
+    let invoicesArray = _get(response, path, null)
+
+    if (_isNumber(index) && index !== -1) {
+      if (remove) Vue.delete(state.invoices, index)
+      else Vue.set(state.invoices, index, invoice)
+    } else if (invoicesArray) state.invoices = invoicesArray
+    else if (invoice) state.invoices.push(invoice)
+    else state.invoices = []
   },
   [Mutate.wallet.transactionList] (state, response) {
     state.transactionList = _get(response, 'data.asset.transactionList', [])

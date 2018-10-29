@@ -6,6 +6,7 @@ export const auth = {
 export const wallet = {
   password: 'password',
   assets: 'assets',
+  invoices: 'invoices',
   current: 'current',
   transactionList: 'transaction/list',
   transactionDescription: 'transaction/description',

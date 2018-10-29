@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios'
 import { VueAuthenticate } from 'vue-authenticate'
 import socketIOClient from 'socket.io-client'
 import sailsIOClient from 'sails.io.js'
+import { _find } from '../utils/lodash'
 
 Vue.use(VueAxios, axios)
 
@@ -12,6 +13,45 @@ const apiPath = `${process.env.VUE_APP_PATH}${process.env.VUE_APP_API_ROUTE}`
 const get = (url, options) => Vue.axios.get(url, options)
 const post = (url, data) => Vue.axios.post(url, data)
 const put = (url, data) => Vue.axios.put(url, data)
+
+// todo: remove when api ready
+
+const invoicesFixture = {
+  'invoicesList': [
+    {
+      id: 1,
+      address: '0x123',
+      description: 'Basic course',
+      createdAt: 1528714070783,
+      amount: 0.442234,
+      amountUsd: 900,
+      currency: 'ETH',
+      status: 'new',
+      service: {
+        id: 1,
+        title: 'UBAI',
+        logo: '1.svg',
+        url: 'https://ubai.co'
+      }
+    },
+    {
+      id: 2,
+      address: '0x123',
+      description: 'Advanced course',
+      createdAt: 1628714070783,
+      amount: 0.51,
+      amountUsd: 1200,
+      currency: 'ETH',
+      status: 'paid',
+      service: {
+        id: 1,
+        title: 'UBAI',
+        logo: '1.svg',
+        url: 'https://ubai.co'
+      }
+    }
+  ]
+}
 
 export const Auth = {
   getUser: () => get(`${apiPath}users/me`),
@@ -40,6 +80,7 @@ export const Contact = {
 }
 
 export const Wallet = {
+  invoicesFixture, // todo: remove when api ready
   get: () => get(`${apiPath}wallets/me`),
   create: password => post(`${apiPath}wallets`, { password }),
   getPassword: () => get(`${apiPath}wallets/password`),
@@ -79,6 +120,14 @@ export const Transaction = {
   get: id => get(`${apiPath}wallets/transactions/${id}`),
   update: (id, description) => put(`${apiPath}wallets/transactions/${id}`, { descr: description }),
   export: id => get(`${apiPath}wallets/transactions/export`, { params: { asset: id } })
+}
+
+export const Invoice = {
+  getAll: () => ({ data: invoicesFixture }),
+  get: id => ({ data: _find(invoicesFixture, ['id', id], null) }),
+  create: () => {},
+  update: () => {},
+  remove: () => {}
 }
 
 /* Socials

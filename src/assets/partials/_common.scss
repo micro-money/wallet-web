@@ -278,6 +278,7 @@ html, body, #app, .app-wrapper {
   /* Support for IE. */
   font-feature-settings: 'liga';
 
+  &.md-10 { font-size: 10px; }
   &.md-11 { font-size: 11px; }
   &.md-12 { font-size: 12px; }
   &.md-14 { font-size: 14px; }
@@ -300,20 +301,20 @@ html, body, #app, .app-wrapper {
     &:hover { color: rgba(255, 255, 255, 0.8) !important; }
   }
 
-  &.green {
-    color: $--color-green;
+  &.green, .green & {
+    color: $--color-green !important;
   }
 
-  &.red {
-    color: $--color-red;
+  &.red, .red & {
+    color: $--color-red !important;
   }
 
-  &.gray {
-    color: $--color-gray-light;
+  &.gray, .gray & {
+    color: $--color-gray-light !important;
   }
 
-  &.orange {
-    color: $--color-orange;
+  &.orange, .orange & {
+    color: $--color-orange !important;
   }
 }
 
