@@ -59,7 +59,7 @@
           <el-col :span="6">
             <el-button
               :disabled="invoice.status === 'paid'"
-              @click="$eventHub.$emit('popup:send', invoice.currency)">PAY</el-button>
+              @click="openSend">PAY</el-button>
           </el-col>
         </el-row>
       </el-card>
@@ -378,7 +378,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { _find } from '@/utils/lodash'
+import { _get, _find } from '@/utils/lodash'
 import copyAddressMixin from '@/mixins/copy-address'
 import currencyMixin from '@/mixins/currency'
 import cryptoMixin from '@/mixins/crypto'
@@ -398,6 +398,7 @@ export default {
     ...mapGetters({
       invoices: 'wallet/invoices',
       transactionList: 'wallet/invoiceTransactionList',
+      assets: 'wallet/defaultAssets',
       isDark: 'auth/isDark',
       transactionsIsLoading: 'status/loadingInvoices'
     }),
@@ -437,6 +438,18 @@ export default {
     },
     invoiceIcon (invoice) {
       return `/img/invoice-services/${invoice.service.id}.svg`
+    },
+    openSend () {
+      const { currency: crypto, address, amount } = this.invoice
+      const invoice = this.invoice
+      const assetId = _get(this.assets, `${crypto}.id`, null)
+
+      if (!assetId) {
+        this.$message({ message: `You have not got a ${crypto} asset. So you can not pay now.`, type: 'error' })
+        return false
+      }
+
+      this.$eventHub.$emit('popup:send', { crypto, address, amount, assetId, invoice })
     }
   }
 }

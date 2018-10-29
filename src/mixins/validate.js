@@ -73,7 +73,7 @@ const rules = {
     const regexp = /^\d+(\.\d+)?$/
 
     if (!value || value === '') throw new Error('Please input amount')
-    if (value.search(regexp) === -1) throw new Error('The amount value must be greater than 0')
+    if (value.toString().search(regexp) === -1) throw new Error('The amount value must be greater than 0')
   }
 }
 

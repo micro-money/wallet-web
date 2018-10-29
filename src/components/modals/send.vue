@@ -23,6 +23,7 @@
         prop="address">
         <el-input
           ref="address"
+          :disabled="!!invoice"
           v-model="model.address"
           class="input-address"
           @focus="addressIsFocused = true"
@@ -67,6 +68,7 @@
         prop="crypto">
         <el-input
           v-model="model.crypto"
+          :disabled="!!invoice"
           @focus="cryptoIsFocused = true"
           @blur="cryptoIsFocused = !!(model.crypto || model.crypto === 0)"
           @input="debounceInputCrypto(crypto, 'USD')"/>
@@ -79,6 +81,7 @@
         prop="fiat">
         <el-input
           v-model="model.fiat"
+          :disabled="!!invoice"
           @focus="fiatIsFocused = true"
           @blur="fiatIsFocused = !!(model.fiat || model.fiat === 0)"
           @input="debounceInputFiat('USD', crypto)"/>
@@ -268,7 +271,8 @@ export default {
         }
       },
       costsLoading: false,
-      form: null
+      form: null,
+      invoice: null
     }
   },
   computed: {
@@ -287,7 +291,7 @@ export default {
         this.validateFieldsSequence(this.model, this.form, ['address', 'crypto', 'fiat'])
     },
     title () {
-      return `Send ${this.currentCrypto}`
+      return this.invoice ? `Payment for Invoice ${this.invoice.id}` : `Send ${this.currentCrypto}`
     },
     id () {
       return this.assetId !== null ? this.assetId : this.$route.params.id
@@ -296,8 +300,12 @@ export default {
       return _find(this.assets, ['id', +this.id]) || null
     },
     assetIcon () {
-      if (this.assetType === 'token') return this.getSrcToken(this.asset)
+      if (this.invoice) return this.invoiceIcon
+      else if (this.assetType === 'token') return this.getSrcToken(this.asset)
       else return this.cryptoSrc
+    },
+    invoiceIcon () {
+      return `/img/invoice-services/${this.invoice.service.id}.svg`
     },
     assetType () {
       return _get(this.asset, 'type', null)
@@ -337,17 +345,23 @@ export default {
       }
     },
     show (newVal) {
-      if (newVal) this.getCost()
+      if (newVal) {
+        this.getCost()
+        if (this.currentCrypto !== 'USD' && this.model.crypto) this.checkRate(this.currentCrypto, 'USD')
+      }
     },
     user (newVal) {
       if (!newVal) this.handleClose()
     }
   },
   mounted () {
-    this.$eventHub.$on('popup:send', async (crypto, address, assetId) => {
+    this.$eventHub.$on('popup:send', async ({ crypto, address, assetId, amount, invoice }) => {
       this.model.address = address || ''
       this.currentCrypto = crypto
       this.assetId = assetId || null
+      this.invoice = invoice
+
+      if (crypto === 'USD' && amount) { this.model.fiat = amount } else if (crypto !== 'USD' && amount) { this.model.crypto = amount }
 
       this.addressIsFocused = this.model.address !== ''
 
@@ -358,7 +372,8 @@ export default {
         this.show = true
         setTimeout(() => {
           this.form = this.$refs.sendForm
-          return this.model.address && this.$refs.address ? this.$refs.address.focus() : null
+          if (this.model.address && this.$refs.address) this.$refs.address.focus()
+          if (crypto !== 'USD' && amount) this.checkRate(crypto, 'USD')
         }, 100)
       }
     })
@@ -379,8 +394,9 @@ export default {
       this.convertedCurrency = null
       this.enterPassword = false
       this.convertRate({ from: null })
-      this.model.fiat = ''
+      this.model = { address: '', crypto: '', fiat: '', message: '' }
       this.assetId = null
+      this.invoice = null
     },
     selectBlock (block) {
       for (const key in this.isSelected) {
@@ -447,6 +463,13 @@ export default {
 @import "../../assets/partials/variables";
 
 .dialog.send {
+
+  .currency-icon {
+    background-color: $--color-gray-super-light;
+    -webkit-border-radius: 60%;
+    -moz-border-radius: 60%;
+    border-radius: 60%;
+  }
 
   .el-tabs__nav {
     margin-left: 40px !important;

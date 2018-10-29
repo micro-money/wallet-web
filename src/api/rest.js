@@ -20,7 +20,7 @@ const invoicesFixture = {
   'invoicesList': [
     {
       id: 1,
-      address: '0x123',
+      address: '0x1E1e8fe83B4e60F1DDa2E7C9e6cC4a2f4Bb4a799',
       description: 'Basic course',
       createdAt: 1528714070783,
       amount: 0.442234,

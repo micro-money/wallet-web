@@ -39,7 +39,13 @@ const getters = {
       }
     }),
   ethAsset: state => state.assets
-    ? state.assets.find((asset, index) => { if (asset.symbol === 'ETH' && asset.type !== 'token') return asset })
+    ? state.assets.find(asset => asset.symbol === 'ETH' && asset.type !== 'token' ? asset : null)
+    : null,
+  defaultAssets: state => state.assets
+    ? {
+      'ETH': state.assets.find(asset => asset.symbol === 'ETH' && asset.type !== 'token' ? asset : null),
+      'BTC': state.assets.find(asset => asset.symbol === 'BTC' ? asset : null)
+    }
     : null
 }
 

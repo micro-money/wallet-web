@@ -105,7 +105,7 @@
           <el-col :span="6">
             <el-button
               :disabled="serviceUnavailable"
-              @click="$eventHub.$emit('popup:send', asset.symbol)">SEND</el-button>
+              @click="$eventHub.$emit('popup:send', { crypto: asset.symbol })">SEND</el-button>
           </el-col>
         </el-row>
       </el-card>
