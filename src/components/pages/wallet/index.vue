@@ -50,7 +50,7 @@
           <el-menu
             v-if="assets[0]"
             ref="menu"
-            :default-active="$route.path !== '/account/wallet/transactions' ? `${path}/asset/${assets[0].id}` : null"
+            :default-active="defaultActiveAsset"
             class="assets-menu">
             <el-menu-item-group class="clearfix">
               <el-menu-item
@@ -307,6 +307,10 @@ export default {
     path () {
       return '/account/wallet'
     },
+    defaultActiveAsset () {
+      return !/(transactions)|(invoice)/.test(this.$route.path) && this.assets[0]
+        ? `${this.path}/asset/${this.assets[0].id}` : null
+    },
     assets () {
       /*  todo: remove it - now need to show just one Eth asset */
       return this.allAssets ? _cloneDeep(this.allAssets)
@@ -413,7 +417,6 @@ export default {
 
       if (!clickMore && invoice) {
         this.debounceChangeAssets(`/account/wallet/invoice/${invoice.id}`)
-        console.log(this.$refs.menu)
         this.$refs.menu.activeIndex = null
       }
     },

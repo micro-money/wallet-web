@@ -33,6 +33,14 @@ export default {
       return type === 'fiat'
         ? this.fixFiat(_get(transaction[rateField], 'USD', 0))
         : this.fixCrypto(_get(transaction, amountField, 0))
+    },
+    getTxnSign (direction) {
+      return direction === 'out' ? '-' : '+'
+    },
+    convertTime (time) {
+      const date = new Date(time)
+
+      return date.toLocaleString()
     }
   }
 }

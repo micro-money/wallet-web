@@ -9,6 +9,7 @@ const state = {
   assets: [],
   invoices: [],
   transactionList: [],
+  invoiceTransactionList: [],
   currentRate: null,
   privateKey: [],
   keystore: [],
@@ -20,6 +21,7 @@ const getters = {
   password: state => state.password,
   assets: state => state.assets,
   invoices: state => state.invoices,
+  invoiceTransactionList: state => state.invoiceTransactionList,
   current: state => state.current, // ({ ...state.current, ...({password: state.current.mnemonic}) }), // todo: remove mnemonic
   transactionList: state => {
     return state.transactionList.filter(transaction => { return _get(transaction, 'to.hash') })
@@ -184,6 +186,7 @@ const actions = {
       response = await Invoice.get(id)
 
       commit(Mutate.wallet.invoices, { response })
+      commit(Mutate.wallet.invoiceTransactionList, response)
       dispatch('status/changeMessage', { response, type: 'success' }, { root: true })
     } catch (e) {
       dispatch('status/changeMessage', { response: e, type: 'error' }, { root: true })
@@ -331,6 +334,9 @@ const mutations = {
     } else if (invoicesArray) state.invoices = invoicesArray
     else if (invoice) state.invoices.push(invoice)
     else state.invoices = []
+  },
+  [Mutate.wallet.invoiceTransactionList] (state, response) {
+    state.invoiceTransactionList = _get(response, 'data.invoice.transactionList', [])
   },
   [Mutate.wallet.transactionList] (state, response) {
     state.transactionList = _get(response, 'data.asset.transactionList', [])

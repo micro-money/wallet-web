@@ -7,6 +7,7 @@ export const wallet = {
   password: 'password',
   assets: 'assets',
   invoices: 'invoices',
+  invoiceTransactionList: 'invoice/transaction/list',
   current: 'current',
   transactionList: 'transaction/list',
   transactionDescription: 'transaction/description',

@@ -48,7 +48,34 @@ const invoicesFixture = {
         title: 'UBAI',
         logo: '1.svg',
         url: 'https://ubai.co'
-      }
+      },
+      transactionList: [
+        {
+          'createdAt': 1529554388830,
+          'updatedAt': 1529554388830,
+          'id': 55,
+          'hash': '0x4bb5cc25a87c6f9e6a9bce43708b5fcbe08e88f2ee4317fa4aa5f67b5817e671',
+          'from': {
+            'hash': '0x1e1e8fe83b4e60f1dda2e7c9e6cc4a2f4bb4a799',
+            'name': 'Me'
+          },
+          'to': {
+            'hash': '0x73fc08fdf34e96372253cfec258112b94062379f',
+            'name': 'NotMe'
+          },
+          'descr': '',
+          'amount': 0.009,
+          'status': 'success',
+          'currency': 'ETH',
+          'asset': 1,
+          'rate': {
+            'USD': 4.82
+          },
+          'platform': 'Ethereum',
+          'network': 'rinkeby',
+          'direction': 'in'
+        }
+      ]
     }
   ]
 }
@@ -124,7 +151,7 @@ export const Transaction = {
 
 export const Invoice = {
   getAll: () => ({ data: invoicesFixture }),
-  get: id => ({ data: _find(invoicesFixture, ['id', id], null) }),
+  get: id => ({ data: { invoice: _find(invoicesFixture.invoicesList, ['id', +id], null) } }),
   create: () => {},
   update: () => {},
   remove: () => {}

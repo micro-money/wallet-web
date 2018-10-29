@@ -7,7 +7,8 @@ const state = {
   loading: false,
   errors: null,
   loadingInstances: {
-    asset: []
+    asset: [],
+    invoice: []
   }
 }
 
@@ -15,7 +16,8 @@ const getters = {
   message: state => state.message,
   loading: state => state.loading,
   errors: state => state.errors,
-  loadingAssets: state => state.loadingInstances.asset.length
+  loadingAssets: state => state.loadingInstances.asset.length,
+  loadingInvoices: state => state.loadingInstances.invoice.length
 }
 
 const actions = {

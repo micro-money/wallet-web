@@ -252,13 +252,13 @@
             <div
               v-if="typeof scope.row.rate.USD === 'number' || scope.row.token"
               :class="['number', { green: scope.row.direction === 'in' }]">
-              {{ getSign(scope.row.direction) }}{{ getTxnAmount(scope.row, 'fiat') }}&nbsp;USD
+              {{ getTxnSign(scope.row.direction) }}{{ getTxnAmount(scope.row, 'fiat') }}&nbsp;USD
             </div>
 
             <div
               v-if="typeof scope.row.amount === 'number' || scope.row.token"
               class="crypto">
-              {{ getSign(scope.row.direction) }}{{ getTxnAmount(scope.row, 'crypto') }}&nbsp;{{ scope.row.symbol ||
+              {{ getTxnSign(scope.row.direction) }}{{ getTxnAmount(scope.row, 'crypto') }}&nbsp;{{ scope.row.symbol ||
               asset.currency }}
             </div>
           </template>
@@ -387,13 +387,13 @@
                 <div
                   v-if="selectedCurrency === 'USD' && (typeof transaction.rate.USD === 'number' || transaction.token)"
                   :class="['number', { green: transaction.direction === 'in' }]">
-                  {{ getSign(transaction.direction) }}{{ getTxnAmount(transaction, 'fiat') }}&nbsp;USD
+                  {{ getTxnSign(transaction.direction) }}{{ getTxnAmount(transaction, 'fiat') }}&nbsp;USD
                 </div>
 
                 <div
                   v-else-if="selectedCurrency === asset.symbol && (typeof transaction.amount === 'number' || transaction.token)"
                   :class="['number', { green: transaction.direction === 'in' }]">
-                  {{ getSign(transaction.direction) }}{{ getTxnAmount(transaction, 'crypto') }}&nbsp;{{ transaction.symbol }}
+                  {{ getTxnSign(transaction.direction) }}{{ getTxnAmount(transaction, 'crypto') }}&nbsp;{{ transaction.symbol }}
                 </div>
               </el-col>
 
@@ -534,14 +534,6 @@ export default {
     tableRowClassName ({ row }) {
       if (row.status === 'failure') return 'red-row'
       else return ''
-    },
-    convertTime (time) {
-      const date = new Date(time)
-
-      return date.toLocaleString()
-    },
-    getSign (direction) {
-      return direction === 'out' ? '-' : '+'
     },
     addAddress (hash, id, alias, symbol) {
       this.$eventHub.$on('transaction:change:name', name => {
