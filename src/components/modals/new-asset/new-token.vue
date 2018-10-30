@@ -143,7 +143,7 @@ export default {
     async startImport () {
       if (this.password) {
         try {
-          const query = { name: this.model.name, currency: 'ETH', address: this.model.address }
+          const query = { name: this.model.name, currency: 'ETH', token: this.model.address }
 
           this.$message({ message: 'Importing...', type: 'success' })
 
