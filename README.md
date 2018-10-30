@@ -1,4 +1,4 @@
-# wallet-front-app v0.8.5
+# wallet-front-app v0.9.0
 
 ## Project setup
 ```
