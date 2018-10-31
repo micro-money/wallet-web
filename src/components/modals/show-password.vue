@@ -7,7 +7,7 @@
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :show-close="false"
-    custom-class="dialog show-password"
+    :custom-class="`dialog show-password ${isDark ? 'dark' : ''}`"
     title="Before start using the wallet"
     center>
     <p class="important">you must backup your password:</p>
@@ -17,8 +17,8 @@
       class="password">
       <span>{{ password }}
         <img
+          :src="getIcon('copy')"
           title="Copy"
-          src="../../assets/images/copy.svg"
           class="icon-button"
           @click="copyToClipboard(password, 'copy-password')"></span>
     </div>
@@ -43,12 +43,13 @@
 </template>
 
 <script>
-import copyAddressMixin from '@/mixins/copy-address'
 import { mapActions, mapGetters } from 'vuex'
 import { _get } from '@/utils/lodash'
+import copyAddressMixin from '@/mixins/copy-address'
+import themeIconsMixin from '@/mixins/theme-icons'
 
 export default {
-  mixins: [copyAddressMixin],
+  mixins: [copyAddressMixin, themeIconsMixin],
   props: {
     showPassword: {
       type: Boolean,
@@ -67,7 +68,8 @@ export default {
   computed: {
     ...mapGetters({
       password: 'wallet/password',
-      user: 'auth/user'
+      user: 'auth/user',
+      isDark: 'auth/isDark'
     }),
     password () {
       return _get(this.user, 'secret', null)
@@ -95,6 +97,11 @@ export default {
 
   .important {
     color: $--color-black;
+
+    .dark & {
+      color: $--color-gray-super-light;
+      border: 0;
+    }
   }
 
   .not-important {
@@ -119,6 +126,10 @@ export default {
     padding: 0 0 30px 0;
     font-size: 20px;
 
+    .dark & {
+      color: $--color-gray-super-light;
+    }
+
     span {
       display: flex;
       align-items:center;
@@ -136,6 +147,10 @@ export default {
     margin-right: 4px;
     opacity: 0.3;
     cursor: pointer;
+
+    .dark & {
+      color: $--color-gray-super-light;
+    }
 
     &:hover {
       opacity: 1;
